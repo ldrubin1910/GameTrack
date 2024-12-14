@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">GameTrack</string>
+    <string name="editar">Editar</string>
+    <string name="borrar">Borrar</string>
+    <string name="anadir">Añadir</string>
+    <string name="titulo">Título</string>
+    <string name="genero">Género</string>
+    <string name="plataforma">Plataforma</string>
+    <string name="desarrollador">Desarrollador</string>
+    <string name="ano_de_salida">Año de salida</string>
+    <string name="en_propiedad">En propiedad</string>
+</resources>

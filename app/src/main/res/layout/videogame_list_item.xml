@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewGenre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Genre" />
+
+    <TextView
+        android:id="@+id/textViewPlatform"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Platform" />
+
+    <TextView
+        android:id="@+id/textViewDeveloper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Developer" />
+
+    <TextView
+        android:id="@+id/textViewReleaseYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Release Year" />
+
+    <CheckBox
+        android:id="@+id/checkBoxOwned"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Owned" />
+
+</LinearLayout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/editTextTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/titulo" />
+
+    <EditText
+        android:id="@+id/editTextGenre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/genero" />
+
+    <EditText
+        android:id="@+id/editTextPlatform"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/plataforma" />
+
+    <EditText
+        android:id="@+id/editTextDeveloper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/desarrollador" />
+
+    <EditText
+        android:id="@+id/editTextReleaseYear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/ano_de_salida"
+        android:inputType="number" />
+
+    <CheckBox
+        android:id="@+id/checkBoxOwned"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/en_propiedad" />
+
+    <Button
+        android:id="@+id/buttonSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Guardar" />
+
+</LinearLayout>
