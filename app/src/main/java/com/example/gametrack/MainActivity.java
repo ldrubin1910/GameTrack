@@ -30,6 +30,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+
     private ArrayList<Videogame> gameList;
     private ArrayAdapter<Videogame> adapter;
     private DBManager dbManager;
