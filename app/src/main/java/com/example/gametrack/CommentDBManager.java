@@ -3,8 +3,10 @@ package com.example.gametrack;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class CommentDBManager extends SQLiteOpenHelper {
 
@@ -22,25 +24,51 @@ public class CommentDBManager extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLA_COMMENTS + " ("
-                + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + COLUMN_GAME_ID + " INTEGER NOT NULL, "
-                + COLUMN_COMMENT + " TEXT NOT NULL, "
-                + "FOREIGN KEY (" + COLUMN_GAME_ID + ") REFERENCES videogames(_id))");
+        try {
+            db.beginTransaction();
+            db.execSQL("CREATE TABLE " + TABLA_COMMENTS + " ("
+                    + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + COLUMN_GAME_ID + " INTEGER NOT NULL, "
+                    + COLUMN_COMMENT + " TEXT NOT NULL, "
+                    + "FOREIGN KEY (" + COLUMN_GAME_ID + ") REFERENCES videogames(_id))");
+            db.setTransactionSuccessful();
+        } catch (SQLException exc) {
+            Log.e("CommentDBManager.onCreate", exc.getMessage());
+        } finally {
+            db.endTransaction();
+        }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLA_COMMENTS);
-        onCreate(db);
+        try {
+            db.beginTransaction();
+            db.execSQL("DROP TABLE IF EXISTS " + TABLA_COMMENTS);
+            db.setTransactionSuccessful();
+        } catch (SQLException exc) {
+            Log.e("CommentDBManager.onUpgrade", exc.getMessage());
+        } finally {
+            db.endTransaction();
+        }
+        this.onCreate(db);
     }
 
-    public long insertComment(long gameId, String comment) {
+    public void insertComment(long gameId, String comment) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_GAME_ID, gameId);
         values.put(COLUMN_COMMENT, comment);
-        return db.insert(TABLA_COMMENTS, null, values);
+
+        try {
+            db.beginTransaction();
+            db.insert(TABLA_COMMENTS, null, values);
+            db.setTransactionSuccessful();
+
+        }  catch (SQLException exc) {
+            Log.e("CommentDBManager.insert", exc.getMessage());
+        } finally {
+            db.endTransaction();
+        }
     }
 
     public String getCommentByGameId(long gameId) {
@@ -49,7 +77,7 @@ public class CommentDBManager extends SQLiteOpenHelper {
                 new String[]{COLUMN_COMMENT},
                 COLUMN_GAME_ID + " = ?",
                 new String[]{String.valueOf(gameId)},
-                null, null, null);
+                null, null, null, null);
 
         String comment = null;
         if (cursor != null && cursor.moveToFirst()) {
@@ -59,9 +87,18 @@ public class CommentDBManager extends SQLiteOpenHelper {
         return comment;
     }
 
-    public int deleteCommentByGameId(long gameId) {
+    public void deleteCommentByGameId(long gameId) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TABLA_COMMENTS, COLUMN_GAME_ID + " = ?", new String[]{String.valueOf(gameId)});
+
+        try {
+            db.beginTransaction();
+            db.delete(TABLA_COMMENTS, COLUMN_GAME_ID + " = ?", new String[]{String.valueOf(gameId)});
+            db.setTransactionSuccessful();
+        } catch (SQLException exc) {
+            Log.e("CommentDBManager.delete", exc.getMessage());
+        } finally {
+            db.endTransaction();
+        }
     }
 
 }

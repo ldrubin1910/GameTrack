@@ -29,6 +29,7 @@ public class AddGameActivity extends AppCompatActivity {
         EditText editTextReleaseYear = findViewById(R.id.editTextReleaseYear);
         CheckBox checkBoxOwned = findViewById(R.id.checkBoxOwned);
         Button buttonSave = findViewById(R.id.buttonSave);
+        Button buttonCancel = findViewById(R.id.buttonCancel);
 
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +60,14 @@ public class AddGameActivity extends AppCompatActivity {
                         Toast.makeText(AddGameActivity.this, "El año de lanzamiento debe ser un número válido.", Toast.LENGTH_SHORT).show();
                     }
                 }
+            }
+        });
+
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setResult(Activity.RESULT_CANCELED);
+                finish();
             }
         });
     }

@@ -67,6 +67,8 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
     public long insertVideogame(String title, String genre, String platform, String developer, int releaseYear, boolean owned) {
+        long id = -1;
+
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_TITLE, title);
@@ -75,10 +77,23 @@ public class DBManager extends SQLiteOpenHelper {
         values.put(COLUMN_DEVELOPER, developer);
         values.put(COLUMN_RELEASE_YEAR, releaseYear);
         values.put(COLUMN_OWNED, owned ? 1 : 0);
-        return db.insert(TABLA_VIDEOGAMES, null, values);
+
+        try {
+            db.beginTransaction();
+            id = db.insert(TABLA_VIDEOGAMES, null, values);
+            db.setTransactionSuccessful();
+        } catch (SQLException e) {
+            Log.e("DBManager.insert", e.getMessage());
+        } finally {
+            db.endTransaction();
+        }
+
+        return id;
     }
 
     public int updateVideogame(long id, String title, String genre, String platform, String developer, int releaseYear, boolean owned) {
+        int rowsAffected = 0;
+
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_TITLE, title);
@@ -87,12 +102,36 @@ public class DBManager extends SQLiteOpenHelper {
         values.put(COLUMN_DEVELOPER, developer);
         values.put(COLUMN_RELEASE_YEAR, releaseYear);
         values.put(COLUMN_OWNED, owned ? 1 : 0);
-        return db.update(TABLA_VIDEOGAMES, values, COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
+
+        try {
+            db.beginTransaction();
+            rowsAffected = db.update(TABLA_VIDEOGAMES, values, COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
+            db.setTransactionSuccessful();
+        } catch (SQLException e) {
+            Log.e("DBManager.update", e.getMessage());
+        } finally {
+            db.endTransaction();
+        }
+
+        return rowsAffected;
     }
 
     public int deleteVideogame(long id) {
+        int rowsAffected = 0;
+
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TABLA_VIDEOGAMES, COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
+
+        try {
+            db.beginTransaction();
+            rowsAffected = db.delete(TABLA_VIDEOGAMES, COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
+            db.setTransactionSuccessful();
+        } catch (SQLException e) {
+            Log.e("DBManager.delete", e.getMessage());
+        } finally {
+            db.endTransaction();
+        }
+
+        return rowsAffected;
     }
 
     public Cursor getAllVideogames() {
@@ -100,7 +139,6 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
     public Cursor getVideogameById(long id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        return db.query(TABLA_VIDEOGAMES, null, COLUMN_ID + " = ?", new String[]{String.valueOf(id)}, null, null, null);
+        return this.getReadableDatabase().query(TABLA_VIDEOGAMES, null, COLUMN_ID + " = ?", new String[]{String.valueOf(id)}, null, null, null);
     }
 }
