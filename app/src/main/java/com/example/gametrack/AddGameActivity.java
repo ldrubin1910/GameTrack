@@ -82,6 +82,7 @@ public class AddGameActivity extends AppCompatActivity {
         });
     }
 
+    // Muestra un diálogo para decidir si añadir un comentario al videojuego y para lanzar la actividad correspondiente
     private void showAddCommentDialog(Intent gameIntent) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Añadir comentario");

@@ -148,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
         return toret;
     }
 
+    // Filtra la lista de videojuegos según la propiedad "owned"
     private void filterGames(boolean owned) {
         ArrayList<Videogame> filteredList = new ArrayList<>();
         for (Videogame game : gameList) {
@@ -224,6 +225,7 @@ public class MainActivity extends AppCompatActivity {
         return toret;
     }
 
+    // Muestra un diálogo de confirmación antes de borrar un videojuego
     private void showDeleteConfirmationDialog(int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirmar borrado");
@@ -247,6 +249,7 @@ public class MainActivity extends AppCompatActivity {
         builder.create().show();
     }
 
+    // Carga la lista de videojuegos desde la base de datos
     private void loadGamesFromDatabase() {
         gameList.clear();
         Cursor cursor = dbManager.getAllVideogames();
