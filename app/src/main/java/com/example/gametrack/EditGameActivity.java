@@ -1,6 +1,7 @@
 package com.example.gametrack;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class EditGameActivity extends AppCompatActivity {
@@ -66,6 +68,25 @@ public class EditGameActivity extends AppCompatActivity {
                     return;
                 }
                 }
+            }
+        });
+
+        Button buttonCancel = findViewById(R.id.buttonCancel);
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(EditGameActivity.this);
+                builder.setTitle("Confirmar cancelación");
+                builder.setMessage("¿Estás seguro de que deseas cancelar? Los cambios no se guardarán.");
+                builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        setResult(Activity.RESULT_CANCELED);
+                        finish();
+                    }
+                });
+                builder.setNegativeButton("No", null);
+                builder.create().show();
             }
         });
     }

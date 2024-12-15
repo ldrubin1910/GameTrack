@@ -66,8 +66,18 @@ public class AddGameActivity extends AppCompatActivity {
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setResult(Activity.RESULT_CANCELED);
-                finish();
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddGameActivity.this);
+                builder.setTitle("Confirmar cancelación");
+                builder.setMessage("¿Estás seguro de que deseas cancelar? Los cambios no se guardarán.");
+                builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        setResult(Activity.RESULT_CANCELED);
+                        finish();
+                    }
+                });
+                builder.setNegativeButton("No", null);
+                builder.create().show();
             }
         });
     }
