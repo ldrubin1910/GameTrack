@@ -63,10 +63,9 @@ public class EditGameActivity extends AppCompatActivity {
 
                         EditGameActivity.this.setResult(Activity.RESULT_OK, resultIntent);
                         EditGameActivity.this.finish();
-                } catch (NumberFormatException e) {
-                    Toast.makeText(EditGameActivity.this, "El año de lanzamiento debe ser un número válido.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                    } catch (NumberFormatException e) {
+                        Toast.makeText(EditGameActivity.this, "El año de lanzamiento debe ser un número válido.", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
