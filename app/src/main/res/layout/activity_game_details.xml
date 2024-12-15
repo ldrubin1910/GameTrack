@@ -13,7 +13,7 @@
             android:id="@+id/titleLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Title:"
+            android:text="Título:"
             android:textStyle="bold" />
 
         <TextView
@@ -27,7 +27,7 @@
             android:id="@+id/genreLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Genre:"
+            android:text="Género:"
             android:textStyle="bold" />
 
         <TextView
@@ -37,12 +37,11 @@
             android:text="Game Genre"
             android:layout_marginBottom="16dp" />
 
-        <!-- Plataforma del videojuego -->
         <TextView
             android:id="@+id/platformLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Platform:"
+            android:text="Platforma:"
             android:textStyle="bold" />
 
         <TextView
@@ -52,12 +51,11 @@
             android:text="Game Platform"
             android:layout_marginBottom="16dp" />
 
-        <!-- Desarrollador del videojuego -->
         <TextView
             android:id="@+id/developerLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Developer:"
+            android:text="Desarrollador:"
             android:textStyle="bold" />
 
         <TextView
@@ -67,12 +65,11 @@
             android:text="Game Developer"
             android:layout_marginBottom="16dp" />
 
-        <!-- Año de lanzamiento del videojuego -->
         <TextView
             android:id="@+id/releaseYearLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Release Year:"
+            android:text="Año de lanzamiento:"
             android:textStyle="bold" />
 
         <TextView
@@ -87,7 +84,7 @@
             android:id="@+id/ownedLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Owned:"
+            android:text="Poseído:"
             android:textStyle="bold" />
 
         <TextView
@@ -101,21 +98,15 @@
             android:id="@+id/commentLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Comment:"
+            android:text="Comentario:"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/commentTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="No comments available"
+            android:text="No hay comentarios disponibles"
             android:layout_marginBottom="16dp" />
-
-        <TextView
-            android:id="@+id/textViewDetails"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
 
         <Button
             android:id="@+id/buttonBack"

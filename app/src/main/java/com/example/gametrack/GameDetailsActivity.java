@@ -38,7 +38,7 @@ public class GameDetailsActivity extends AppCompatActivity {
         developerView.setText(developer);
         releaseYearView.setText(String.valueOf(releaseYear));
         ownedView.setText(owned ? "Owned" : "Not Owned");
-        commentView.setText(comment != null ? comment : "No comments available");
+        commentView.setText(comment != null ? comment : "No hay comentarios disponibles");
 
         Button backButton = findViewById(R.id.buttonBack);
         backButton.setOnClickListener(new View.OnClickListener() {

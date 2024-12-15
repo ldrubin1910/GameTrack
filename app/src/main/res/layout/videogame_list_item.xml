@@ -41,6 +41,6 @@
         android:id="@+id/checkBoxOwned"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Owned" />
+        android:text="Poseído" />
 
 </LinearLayout>
