@@ -62,17 +62,9 @@ public class VideogameArrayAdapter extends ArrayAdapter<Videogame> {
         viewHolder.textViewGenre.setText(getItem(position).getGenre());
         viewHolder.textViewPlatform.setText(getItem(position).getPlatform());
         viewHolder.textViewDeveloper.setText(getItem(position).getDeveloper());
-        //viewHolder.textViewReleaseYear.setText(getItem(position).getReleaseYear());
         viewHolder.textViewReleaseYear.setText(String.valueOf(getItem(position).getReleaseYear()));
 
         viewHolder.checkBoxOwned.setChecked(getItem(position).isOwned());
-        /*viewHolder.checkBoxOwned.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                videogameList.get(position).setOwned(isChecked);
-                notifyDataSetChanged();
-            }
-        });*/
 
         convertView.setTag(viewHolder);
 

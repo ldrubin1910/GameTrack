@@ -231,8 +231,6 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                /*gameList.remove(position);
-                adapter.notifyDataSetChanged();*/
 
                 Videogame game = gameList.get(position);
 
