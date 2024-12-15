@@ -9,4 +9,6 @@
     <string name="desarrollador">Desarrollador</string>
     <string name="ano_de_salida">Año de salida</string>
     <string name="en_propiedad">En propiedad</string>
+    <string name="ver_detalles">Ver detalles</string>
+    <string name="volver">Volver</string>
 </resources>

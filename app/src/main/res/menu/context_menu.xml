@@ -6,4 +6,7 @@
     <item
         android:id="@+id/context_delete"
         android:title="@string/borrar" />
+    <item
+        android:id="@+id/context_details"
+        android:title="@string/ver_detalles" />
 </menu>

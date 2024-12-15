@@ -22,6 +22,8 @@
         </activity>
         <activity android:name=".AddGameActivity" />
         <activity android:name=".EditGameActivity" />
+        <activity android:name=".AddCommentActivity" />
+        <activity android:name=".GameDetailsActivity" />
     </application>
 
 </manifest>

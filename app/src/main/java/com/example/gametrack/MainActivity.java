@@ -5,17 +5,13 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.ContextMenu;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -33,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Videogame> gameList;
     private ArrayAdapter<Videogame> adapter;
     private DBManager dbManager;
+    private CommentDBManager commentDBManager;
 
 
     @Override
@@ -52,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         gameList = new ArrayList<>();
         adapter = new VideogameArrayAdapter(this, R.layout.videogame_list_item, gameList);
         dbManager = new DBManager(this);
+        commentDBManager = new CommentDBManager(this);
 
         listViewGame.setAdapter(adapter);
 
@@ -72,17 +70,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == RESULT_OK) {
-            /*String title = data.getStringExtra("title");
-            String genre = data.getStringExtra("genre");
-            String platform = data.getStringExtra("platform");
-            String developer = data.getStringExtra("developer");
-            int releaseYear = data.getIntExtra("releaseYear", 0);
-            boolean owned = data.getBooleanExtra("owned", false);
-
-            Videogame newGame = new Videogame(title, genre, platform, developer, releaseYear, owned);
-            gameList.add(newGame);
-            adapter.notifyDataSetChanged();*/
-
             String title = data.getExtras().getString("title");
             String genre = data.getExtras().getString("genre");
             String platform = data.getExtras().getString("platform");
@@ -94,35 +81,25 @@ public class MainActivity extends AppCompatActivity {
             if (newId != -1) {
                 gameList.add(new Videogame(newId, title, genre, platform, developer, releaseYear, owned));
                 adapter.notifyDataSetChanged();
+
+                String comment = data.getExtras().getString("comment");
+                if (comment != null && !comment.isEmpty()) {
+                    commentDBManager.insertComment(newId, comment);
+                }
             }
 
         } else if (requestCode == 2 && resultCode == RESULT_OK) {
-            /*int position = data.getIntExtra("position", -1);
+            int position = data.getExtras().getInt("position", -1);
 
             if (position != -1) {
                 Videogame game = gameList.get(position);
 
-                game.setTitle(data.getStringExtra("title"));
-                game.setGenre(data.getStringExtra("genre"));
-                game.setPlatform(data.getStringExtra("platform"));
-                game.setDeveloper(data.getStringExtra("developer"));
-                game.setReleaseYear(data.getIntExtra("releaseYear", 0));
-                game.setOwned(data.getBooleanExtra("owned", false));
-
-                adapter.notifyDataSetChanged();
-            }*/
-
-            int position = data.getIntExtra("position", -1);
-
-            if (position != -1) {
-                Videogame game = gameList.get(position);
-
-                game.setTitle(data.getStringExtra("title"));
-                game.setGenre(data.getStringExtra("genre"));
-                game.setPlatform(data.getStringExtra("platform"));
-                game.setDeveloper(data.getStringExtra("developer"));
-                game.setReleaseYear(data.getIntExtra("releaseYear", 0));
-                game.setOwned(data.getBooleanExtra("owned", false));
+                game.setTitle(data.getExtras().getString("title"));
+                game.setGenre(data.getExtras().getString("genre"));
+                game.setPlatform(data.getExtras().getString("platform"));
+                game.setDeveloper(data.getExtras().getString("developer"));
+                game.setReleaseYear(data.getExtras().getInt("releaseYear", 0));
+                game.setOwned(data.getExtras().getBoolean("owned", false));
 
                 int rowsUpdated = dbManager.updateVideogame(
                         game.getId(),
@@ -180,7 +157,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         adapter = new VideogameArrayAdapter(this, R.layout.videogame_list_item, filteredList);
-        ((ListView) findViewById(R.id.listViewGame)).setAdapter(adapter);
+        ListView listView = findViewById(R.id.listViewGame);
+        listView.setAdapter(adapter);
     }
 
     @Override
@@ -211,6 +189,36 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("releaseYear", game.getReleaseYear());
             intent.putExtra("owned", game.isOwned());
             startActivityForResult(intent, 2);
+            toret = true;
+        } else if (itemId == R.id.context_details) {
+            long gameId = gameList.get(position).getId();
+            Intent intent = new Intent(this, GameDetailsActivity.class);
+
+            Cursor cursor = dbManager.getVideogameById(gameId);
+            if (cursor.moveToFirst()) {
+                String title = cursor.getString(1);
+                String genre = cursor.getString(2);
+                String platform = cursor.getString(3);
+                String developer = cursor.getString(4);
+                int releaseYear = cursor.getInt(5);
+                boolean owned = cursor.getInt(6) == 1;
+
+                intent.putExtra("game_id", gameId);
+                intent.putExtra("title", title);
+                intent.putExtra("genre", genre);
+                intent.putExtra("platform", platform);
+                intent.putExtra("developer", developer);
+                intent.putExtra("release_year", releaseYear);
+                intent.putExtra("owned", owned);
+
+                String comment = commentDBManager.getCommentByGameId(gameId);
+                intent.putExtra("comment", comment);
+
+                startActivity(intent);
+                cursor.close();
+            }
+
+            toret = true;
         }
 
         return toret;
@@ -230,6 +238,8 @@ public class MainActivity extends AppCompatActivity {
 
                 int rowsDeleted = dbManager.deleteVideogame(game.getId());
                 if (rowsDeleted > 0) {
+                    commentDBManager.deleteCommentByGameId(game.getId());
+
                     gameList.remove(position);
                     adapter.notifyDataSetChanged();
                 }

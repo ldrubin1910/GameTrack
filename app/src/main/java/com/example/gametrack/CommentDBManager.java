@@ -43,9 +43,26 @@ public class CommentDBManager extends SQLiteOpenHelper {
         return db.insert(TABLA_COMMENTS, null, values);
     }
 
-    public Cursor getCommentByGameId(long gameId) {
+    public String getCommentByGameId(long gameId) {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.query(TABLA_COMMENTS, null, COLUMN_GAME_ID + " = ?", new String[]{String.valueOf(gameId)}, null, null, null);
+        Cursor cursor = db.query(TABLA_COMMENTS,
+                new String[]{COLUMN_COMMENT},
+                COLUMN_GAME_ID + " = ?",
+                new String[]{String.valueOf(gameId)},
+                null, null, null);
+
+        String comment = null;
+        if (cursor != null && cursor.moveToFirst()) {
+            comment = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_COMMENT));
+            cursor.close();
+        }
+        return comment;
     }
+
+    public int deleteCommentByGameId(long gameId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLA_COMMENTS, COLUMN_GAME_ID + " = ?", new String[]{String.valueOf(gameId)});
+    }
+
 }
 

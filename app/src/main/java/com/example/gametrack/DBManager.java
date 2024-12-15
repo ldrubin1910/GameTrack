@@ -98,4 +98,9 @@ public class DBManager extends SQLiteOpenHelper {
     public Cursor getAllVideogames() {
         return this.getReadableDatabase().query(TABLA_VIDEOGAMES, null, null, null, null, null, null);
     }
+
+    public Cursor getVideogameById(long id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.query(TABLA_VIDEOGAMES, null, COLUMN_ID + " = ?", new String[]{String.valueOf(id)}, null, null, null);
+    }
 }

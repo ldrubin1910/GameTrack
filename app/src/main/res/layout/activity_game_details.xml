@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/titleLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title:"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Game Title"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/genreLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Genre:"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/genreTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Game Genre"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Plataforma del videojuego -->
+        <TextView
+            android:id="@+id/platformLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Platform:"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/platformTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Game Platform"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Desarrollador del videojuego -->
+        <TextView
+            android:id="@+id/developerLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Developer:"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/developerTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Game Developer"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Año de lanzamiento del videojuego -->
+        <TextView
+            android:id="@+id/releaseYearLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Release Year:"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/releaseYearTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2023"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Propiedad del videojuego -->
+        <TextView
+            android:id="@+id/ownedLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Owned:"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/ownedTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Yes/No"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/commentLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comment:"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/commentTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No comments available"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/textViewDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/buttonBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/volver" />
+    </LinearLayout>
+</ScrollView>
